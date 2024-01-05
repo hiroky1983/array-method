@@ -43,3 +43,12 @@ func FindIndex[T any](slice []T, condition func(T) bool) int {
 	}
 	return -1
 }
+
+func Some[T any](slice []T, condition func(T) bool) bool {
+	for _, v := range slice {
+		if condition(v) {
+			return true
+		}
+	}
+	return false
+}
