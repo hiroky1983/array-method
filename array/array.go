@@ -43,4 +43,3 @@ func FindIndex[T any](slice []T, condition func(T) bool) int {
 	}
 	return -1
 }
-
