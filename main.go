@@ -65,4 +65,10 @@ func main() {
 		return p.Name == "Oyaji"
 	})
 	fmt.Println(notFindIndex) // -1
+
+	// Someを使ってみる
+	someAlice := array.Some(people, func(p Person) bool {
+		return p.Name == "Alice"
+	})
+	fmt.Println(someAlice) // true
 }
