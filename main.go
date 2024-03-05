@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/hiroky1983/array/array"
+	"github.com/hiroky1983/array-method/array/array"
 )
 
 func main() {
