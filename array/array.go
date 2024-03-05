@@ -52,3 +52,9 @@ func Some[T any](slice []T, condition func(T) bool) bool {
 	}
 	return false
 }
+
+func ForEach[T any](slice []T, callback func(T)) {
+	for _, v := range slice {
+		callback(v)
+	}
+}
