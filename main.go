@@ -34,7 +34,7 @@ func main() {
 
 	findBob := array.Filter(people, func(p Person) bool {
 		return p.Name == "Bob"
-	})
+	}) 
 	fmt.Println(findBob) // [{Bob 30}]
 	fmt.Println(people)
 
