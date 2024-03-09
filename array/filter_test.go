@@ -10,6 +10,11 @@ type TestStruct struct {
 	Age  int
 }
 
+type TestStructPointer struct {
+	Name *string
+	Age  *int
+}
+
 func TestFilterTypeInt(t *testing.T) {
 	type args struct {
 		slice     []int
@@ -110,6 +115,87 @@ func TestFilterTypeStruct(t *testing.T) {
 				condition: func(v TestStruct) bool { return  v.Name == "Bob"},
 			},
 			want: []TestStruct{{"Bob", 15}},
+		},
+	}
+	for _, tt := range stringTests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Filter(tt.args.slice, tt.args.condition); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Filter() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestFilterTypeStructPointer (t *testing.T) {
+	name := "Alice"
+	age := 25
+	personsPointer := []TestStructPointer{
+		{Name: &name, Age: &age},
+	}
+	type args struct {
+		slice     []TestStructPointer
+		condition func(TestStructPointer) bool
+	}
+	stringTests := []struct {
+		name string
+		args args
+		want []TestStructPointer
+	}{
+		{
+			name: "Test case array Struct1",
+			args: args{
+				slice:     personsPointer,
+				condition: func(v TestStructPointer) bool { return *v.Age > 12},
+			},
+			want: personsPointer,
+		},
+		{
+			name: "Test case array Struct1",
+			args: args{
+				slice:     personsPointer,
+				condition: func(v TestStructPointer) bool { return *v.Age > 12},
+			},
+			want: personsPointer,
+		},
+	}
+	for _, tt := range stringTests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Filter(tt.args.slice, tt.args.condition); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Filter() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestFilterTypeStructPointerNil (t *testing.T) {
+	personsPointer := []TestStructPointer{
+		{Name: nil, Age: nil},
+	}
+
+	type args struct {
+		slice     []TestStructPointer
+		condition func(TestStructPointer) bool
+	}
+	stringTests := []struct {
+		name string
+		args args
+		want []TestStructPointer
+	}{
+		{
+			name: "Test case array Struct1",
+			args: args{
+				slice:     personsPointer,
+				condition: func(v TestStructPointer) bool { return *v.Age > 12},
+			},
+			want: personsPointer,
+		},
+		{
+			name: "Test case array Struct1",
+			args: args{
+				slice:     personsPointer,
+				condition: func(v TestStructPointer) bool { return *v.Age > 12},
+			},
+			want: personsPointer,
 		},
 	}
 	for _, tt := range stringTests {
