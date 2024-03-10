@@ -6,17 +6,45 @@ import (
 	"github.com/hiroky1983/array-method/array"
 )
 
+type Person struct {
+	Name string
+	Age  int
+}
+
+type PersonPointer struct {
+	Name *string
+	Age  *int
+}
+
 func main() {
 	nums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	evens := array.Filter(nums, func(n int) bool {
 		return n%2 == 0
 	})
-	fmt.Println(evens) // [2 4 6 8 10]
 
-	type Person struct {
-		Name string
-		Age  int
+	name := "Alice"
+	age := 25
+	pa := []PersonPointer{
+		{Name: &name, Age: &age},
 	}
+	paNil := []PersonPointer{
+		{Name: nil, Age: nil},
+	}
+
+	personsPointer := array.Filter(pa, func(p PersonPointer) bool {
+		return *p.Name == "Alice"
+	})
+	fmt.Println(personsPointer) // [{Alice 25}]
+	personsPointerNil := array.Filter(paNil, func(p PersonPointer) bool {
+		return p.Name == nil
+	})
+
+	fmt.Println(personsPointerNil) // [{<nil> <nil>}]
+
+	fmt.Println(evens) // [2 4 6 8 10]
+	fmt.Printf("%p", &nums)
+	fmt.Printf("%p", &evens) // [2 4 6 8 10]
+
 	people := []Person{
 		{"Alice", 25},
 		{"Bob", 30},
