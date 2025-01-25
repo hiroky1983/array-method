@@ -1,8 +1,7 @@
 package main
 
 import (
-	"fmt"
-
+	"github.com/davecgh/go-spew/spew"
 	"github.com/hiroky1983/array-method/array"
 )
 
@@ -22,10 +21,13 @@ func main() {
 	// 	return n%2 == 0
 	// })
 
-	name := "Alice"
-	age := 25
+	name1 := "Alice"
+	age1 := 25
+	name2 := "Bob"
+	age2 := 30
 	pa := []PersonPointer{
-		{Name: &name, Age: &age},
+		{Name: &name1, Age: &age1},
+		{Name: &name2, Age: &age2},
 	}
 	// paNil := []PersonPointer{
 	// 	{Name: nil, Age: nil},
@@ -33,8 +35,10 @@ func main() {
   array := array.NewArray(pa).Filter(func(p PersonPointer) bool {
 		return *p.Name == "Alice"
 	})
+	name1 = "mac"
 
-	fmt.Println(array)
+	spew.Dump(array)
+	spew.Dump(pa)
 
 	// fmt.Println(evens) // [2 4 6 8 10]
 	// fmt.Printf("%p", &nums)

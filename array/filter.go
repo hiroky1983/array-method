@@ -7,7 +7,7 @@ func Filter[T any](slice []T, condition func(T) bool) []T {
 	result := make([]T, 0, len(slice))
 	for _, v := range slice {
 		if condition(v) {
-			result = append(result, v)
+			result = append(result, copyValue(v))
 		}
 	}
 	return result
