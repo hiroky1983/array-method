@@ -1,5 +1,6 @@
 package array
 
+
 func Map[Input any, Output any](slice []Input, transform func(Input) Output) []Output {
 	if slice == nil {
 		return nil
