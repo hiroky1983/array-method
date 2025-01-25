@@ -1,5 +1,9 @@
 # Array Method Package
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/hiroky1983/array-method.svg)](https://pkg.go.dev/github.com/hiroky1983/array-method)
+
+[Go Doc](https://pkg.go.dev/github.com/hiroky1983/array-method)
+
 This package provides convenient methods for arrays and slices in Go, inspired by JavaScript's Array methods. It allows for easy operations such as filtering, mapping, searching, and more.
 
 ## Installation
