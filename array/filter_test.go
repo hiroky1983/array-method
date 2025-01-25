@@ -187,15 +187,7 @@ func TestFilterTypeStructPointerNil (t *testing.T) {
 				slice:     personsPointer,
 				condition: func(v TestStructPointer) bool { return *v.Age > 12},
 			},
-			want: personsPointer,
-		},
-		{
-			name: "Test case array Struct1",
-			args: args{
-				slice:     personsPointer,
-				condition: func(v TestStructPointer) bool { return *v.Age > 12},
-			},
-			want: personsPointer,
+			want: []TestStructPointer{},
 		},
 	}
 	for _, tt := range stringTests {
@@ -204,5 +196,28 @@ func TestFilterTypeStructPointerNil (t *testing.T) {
 				t.Errorf("Filter() = %v, want %v", got, tt.want)
 			}
 		})
+	}
+}
+
+func TestFilterMemoryIndependence(t *testing.T) {
+	name1 := "Alice"
+	age1 := 25
+	name2 := "Bob"
+	age2 := 30
+	personsPointer := []TestStructPointer{
+		{Name: &name1, Age: &age1},
+		{Name: &name2, Age: &age2},
+	}
+
+	filtered := Filter(personsPointer, func(v TestStructPointer) bool {
+		return *v.Age > 20
+	})
+
+	// 元のスライスの最初の要素を変更
+	*personsPointer[0].Name = "Changed"
+
+	// フィルタリングされたスライスのメモリアドレスが異なることを確認
+	if &filtered[0] == &personsPointer[0] {
+		t.Errorf("Filtered slice should be managed in a different memory location")
 	}
 }
