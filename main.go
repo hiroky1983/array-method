@@ -27,19 +27,14 @@ func main() {
 	pa := []PersonPointer{
 		{Name: &name, Age: &age},
 	}
-	paNil := []PersonPointer{
-		{Name: nil, Age: nil},
-	}
-
-	personsPointer := array.Filter(pa, func(p PersonPointer) bool {
+	// paNil := []PersonPointer{
+	// 	{Name: nil, Age: nil},
+	// }
+  array := array.NewArray(pa).Filter(func(p PersonPointer) bool {
 		return *p.Name == "Alice"
 	})
-	fmt.Printf("personsPointer %+v\n", personsPointer) // [{Alice 25}]
-	personsPointerNil := array.Filter(paNil, func(p PersonPointer) bool {
-		return p.Name == nil
-	})
 
-	fmt.Printf("personsPointerNil %+v\n",personsPointerNil) // [{<nil> <nil>}]
+	fmt.Println(array)
 
 	// fmt.Println(evens) // [2 4 6 8 10]
 	// fmt.Printf("%p", &nums)
