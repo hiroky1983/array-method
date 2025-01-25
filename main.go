@@ -35,7 +35,8 @@ func main() {
   array := array.NewArray(pa).Filter(func(p PersonPointer) bool {
 		return *p.Name == "Alice"
 	})
-	name1 = "mac"
+	name3 := "mac"
+	pa[0].Name = &name3
 
 	spew.Dump(array)
 	spew.Dump(pa)
