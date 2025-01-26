@@ -18,8 +18,6 @@ Below are examples of how to use the main features of this package.
 
 ### Filter
 
-#### Function Call
-
 Extract elements from a slice that meet a condition.
 
 ```go
@@ -36,8 +34,6 @@ evens := array.Filter(nums, func(n int) bool {
 
 ### Map
 
-#### Function Call
-
 Apply a function to each element of a slice to create a new slice.
 
 ```go
@@ -53,8 +49,6 @@ names := array.Map(people, func(p Person) string {
 
 ### Find
 
-#### Function Call
-
 Find the first element in a slice that meets a condition.
 
 ```go
@@ -65,8 +59,6 @@ person := array.Find(people, func(p Person) bool {
 ```
 
 ### FindIndex
-
-#### Function Call
 
 Find the index of the first element in a slice that meets a condition.
 
@@ -79,8 +71,6 @@ index := array.FindIndex(people, func(p Person) bool {
 
 ### ForEach
 
-#### Function Call
-
 Perform an action for each element in a slice.
 
 ```go
@@ -88,4 +78,26 @@ array.ForEach(people, func(p Person) {
     fmt.Println(p.Name)
 })
 // Output: Alice Bob
+```
+
+### Reduce
+
+Reduce a slice to a single value.
+
+```go
+result := array.Reduce(nums, func(prev int, current int) int {
+    return prev + current
+}, 0)
+// result will be 15
+```
+
+### Some
+
+Check if at least one element in a slice meets a condition.
+
+```go
+result := array.Some(nums, func(n int) bool {
+    return n%2 == 0
+})
+// result will be true
 ```
