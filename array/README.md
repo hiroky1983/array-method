@@ -18,8 +18,6 @@ Below are examples of how to use the main features of this package.
 
 ### Filter
 
-#### Function Call
-
 Extract elements from a slice that meet a condition.
 
 ```go
@@ -34,21 +32,7 @@ evens := array.Filter(nums, func(n int) bool {
 // evens will be [2, 4]
 ```
 
-#### Method Chaining
-
-Use `NewArray` to filter with method chaining.
-
-```go
-nums := []int{1, 2, 3, 4, 5}
-evens := array.NewArray(nums).Filter(func(n int) bool {
-    return n%2 == 0
-})
-// evens will be [2, 4]
-```
-
 ### Map
-
-#### Function Call
 
 Apply a function to each element of a slice to create a new slice.
 
@@ -63,22 +47,7 @@ names := array.Map(people, func(p Person) string {
 // names will be ["Alice", "Bob"]
 ```
 
-#### Method Chaining
-
-```go
-people := []Person{
-    {"Alice", 25},
-    {"Bob", 30},
-}
-names := array.NewArray(people).Map(func(p Person) string {
-    return p.Name
-})
-// names will be ["Alice", "Bob"]
-```
-
 ### Find
-
-#### Function Call
 
 Find the first element in a slice that meets a condition.
 
@@ -89,18 +58,7 @@ person := array.Find(people, func(p Person) bool {
 // person will be &{Alice 25}
 ```
 
-#### Method Chaining
-
-```go
-person := array.NewArray(people).Find(func(p Person) bool {
-    return p.Name == "Alice"
-})
-// person will be &{Alice 25}
-```
-
 ### FindIndex
-
-#### Function Call
 
 Find the index of the first element in a slice that meets a condition.
 
@@ -111,18 +69,7 @@ index := array.FindIndex(people, func(p Person) bool {
 // index will be 1
 ```
 
-#### Method Chaining
-
-```go
-index := array.NewArray(people).FindIndex(func(p Person) bool {
-    return p.Name == "Bob"
-})
-// index will be 1
-```
-
 ### ForEach
-
-#### Function Call
 
 Perform an action for each element in a slice.
 
@@ -133,11 +80,24 @@ array.ForEach(people, func(p Person) {
 // Output: Alice Bob
 ```
 
-#### Method Chaining
+### Reduce
+
+Reduce a slice to a single value.
 
 ```go
-array.NewArray(people).ForEach(func(p Person) {
-    fmt.Println(p.Name)
+result := array.Reduce(nums, func(prev int, current int) int {
+    return prev + current
+}, 0)
+// result will be 15
+```
+
+### Some
+
+Check if at least one element in a slice meets a condition.
+
+```go
+result := array.Some(nums, func(n int) bool {
+    return n%2 == 0
 })
-// Output: Alice Bob
+// result will be true
 ```
