@@ -28,6 +28,13 @@ func main() {
 		{Name: "David", Age: 18},
 		{Name: "Eve", Age: 21},
 	}
+	// Map
+	personMap := array.Map(pc, func(person Person) NewPerson {
+		return NewPerson{Person: person, IsAdult: person.Age >= 20}
+	})
+
+	spew.Dump(personMap)
+
 	// reduce
 	personWithIsAdult := array.Reduce(pc, func(prev []NewPerson, current Person) []NewPerson {
 		return append(prev, NewPerson{Person: Person{Name: current.Name, Age: current.Age}, IsAdult: current.Age >= 20})

@@ -34,18 +34,6 @@ evens := array.Filter(nums, func(n int) bool {
 // evens will be [2, 4]
 ```
 
-#### Method Chaining
-
-Use `NewArray` to filter with method chaining.
-
-```go
-nums := []int{1, 2, 3, 4, 5}
-evens := array.NewArray(nums).Filter(func(n int) bool {
-    return n%2 == 0
-})
-// evens will be [2, 4]
-```
-
 ### Map
 
 #### Function Call
@@ -58,19 +46,6 @@ people := []Person{
     {"Bob", 30},
 }
 names := array.Map(people, func(p Person) string {
-    return p.Name
-})
-// names will be ["Alice", "Bob"]
-```
-
-#### Method Chaining
-
-```go
-people := []Person{
-    {"Alice", 25},
-    {"Bob", 30},
-}
-names := array.NewArray(people).Map(func(p Person) string {
     return p.Name
 })
 // names will be ["Alice", "Bob"]
@@ -89,15 +64,6 @@ person := array.Find(people, func(p Person) bool {
 // person will be &{Alice 25}
 ```
 
-#### Method Chaining
-
-```go
-person := array.NewArray(people).Find(func(p Person) bool {
-    return p.Name == "Alice"
-})
-// person will be &{Alice 25}
-```
-
 ### FindIndex
 
 #### Function Call
@@ -111,15 +77,6 @@ index := array.FindIndex(people, func(p Person) bool {
 // index will be 1
 ```
 
-#### Method Chaining
-
-```go
-index := array.NewArray(people).FindIndex(func(p Person) bool {
-    return p.Name == "Bob"
-})
-// index will be 1
-```
-
 ### ForEach
 
 #### Function Call
@@ -128,15 +85,6 @@ Perform an action for each element in a slice.
 
 ```go
 array.ForEach(people, func(p Person) {
-    fmt.Println(p.Name)
-})
-// Output: Alice Bob
-```
-
-#### Method Chaining
-
-```go
-array.NewArray(people).ForEach(func(p Person) {
     fmt.Println(p.Name)
 })
 // Output: Alice Bob
