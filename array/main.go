@@ -2,36 +2,38 @@ package array
 
 import "reflect"
 
-type ArrayType[T any] []T
+type ArrayType[T any, U any] []T
 
-func NewArray[T any](slice []T) ArrayType[T] {
-	result := make([]T, len(slice))
-	copy(result, slice)
-	return result
+func NewArray[T any, U any](slice []T) ArrayType[T, U] {
+	return ArrayType[T, U](slice)
 }
 
-func (a ArrayType[T]) Filter(condition func(T) bool) ArrayType[T] {
+func (a ArrayType[T, U]) Filter(condition func(T) bool) []T {
 	return Filter(a, condition)
 }
 
-func (a ArrayType[T]) Find(condition func(T) bool) *T {
+func (a ArrayType[T, U]) Find(condition func(T) bool) *T {
 	return Find(a, condition)
 }
 
-func (a ArrayType[T]) FindIndex(condition func(T) bool) int {
+func (a ArrayType[T, U]) FindIndex(condition func(T) bool) int {
 	return FindIndex(a, condition)
 }
 
-func (a ArrayType[T]) Map(condition func(T) T) ArrayType[T] {
+func (a ArrayType[T, U]) Map(condition func(T) T) []T {
 	return Map(a, condition)
 }
 
-func (a ArrayType[T]) ForEach(condition func(T)) {
+func (a ArrayType[T, U]) ForEach(condition func(T)) {
 	ForEach(a, condition)
 }
 
-func (a ArrayType[T]) Some(condition func(T) bool) bool {
+func (a ArrayType[T, U]) Some(condition func(T) bool) bool {
 	return Some(a, condition)
+}
+
+func (a ArrayType[T, U]) Reduce(reducer func(U, T) U, initial U) U {
+	return Reduce(a, reducer, initial)
 }
 
 // hasNilPointer は、構造体のポインタフィールドがnilの場合にtrueを返します

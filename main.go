@@ -16,87 +16,29 @@ type PersonPointer struct {
 }
 
 func main() {
-	// nums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	// evens := array.Filter(nums, func(n int) bool {
-	// 	return n%2 == 0
-	// })
-
-	name1 := "Alice"
-	age1 := 25
-	name2 := "Bob"
-	age2 := 30
-	pa := []PersonPointer{
-		{Name: &name1, Age: &age1},
-		{Name: &name2, Age: &age2},
+	type NewPerson struct {
+		Person Person
+		IsAdult bool
 	}
-	// paNil := []PersonPointer{
-	// 	{Name: nil, Age: nil},
-	// }
-  array := array.NewArray(pa).Filter(func(p PersonPointer) bool {
-		return *p.Name == "Alice"
-	})
-	name3 := "mac"
-	pa[0].Name = &name3
 
-	spew.Dump(array)
-	spew.Dump(pa)
+	pc := []Person{
+		{Name: "Alice", Age: 25},
+		{Name: "Bob", Age: 30},
+		{Name: "Charlie", Age: 15},
+		{Name: "David", Age: 18},
+		{Name: "Eve", Age: 21},
+	}
+	// reduce
+	personWithIsAdult := array.Reduce(pc, func(prev []NewPerson, current Person) []NewPerson {
+		return append(prev, NewPerson{Person: Person{Name: current.Name, Age: current.Age}, IsAdult: current.Age >= 20})
+	}, []NewPerson{})
 
-	// fmt.Println(evens) // [2 4 6 8 10]
-	// fmt.Printf("%p", &nums)
-	// fmt.Printf("%p", &evens) // [2 4 6 8 10]
+	spew.Dump(personWithIsAdult)
 
-	// people := []Person{
-	// 	{"Alice", 25},
-	// 	{"Bob", 30},
-	// 	{"Carol", 35},
-	// 	{"Dave", 40},
-	// }
-	// persons := array.Map(people, func(p Person) Person {
-	// 	return p
-	// })
-	// fmt.Println(persons) // [Alice Bob Carol Dave]
-	// names := array.Map(people, func(p Person) string {
-	// 	return p.Name
-	// })
-	// fmt.Println(names) // [Alice Bob Carol Dave]
+	nums := []int{1, 2, 3, 4, 5}
 
-	// findBob := array.Filter(people, func(p Person) bool {
-	// 	return p.Name == "Bob"
-	// }) 
-	// fmt.Println(findBob) // [{Bob 30}]
-	// fmt.Println(people)
-
-	// // Reduceを使ってみる
-	// sum := array.Reduce(nums, 0, func(acc int, n int) int {
-	// 	return acc + n
-	// })
-	// fmt.Println(sum) // 55
-
-	// // Findを使ってみる
-	// findAlice := array.Find(people, func(p Person) bool {
-	// 	return p.Name == "Alice"
-	// })
-	// fmt.Println(findAlice) // &{Alice 25}
-
-	// notFind := array.Find(people, func(p Person) bool {
-	// 	return p.Name == "Oyaji"
-	// })
-	// fmt.Println(notFind) // <nil>
-
-	// // FindIndexを使ってみる
-	// findIndexCarol := array.FindIndex(people, func(p Person) bool {
-	// 	return p.Name == "Carol"
-	// })
-	// fmt.Println(findIndexCarol) // 2
-
-	// notFindIndex := array.FindIndex(people, func(p Person) bool {
-	// 	return p.Name == "Oyaji"
-	// })
-	// fmt.Println(notFindIndex) // -1
-
-	// // Someを使ってみる
-	// someAlice := array.Some(people, func(p Person) bool {
-	// 	return p.Name == "Alice"
-	// })
-	// fmt.Println(someAlice) // true
+	incrimentNumber := array.Reduce(nums, func(prev int, current int) int {
+		return prev + current
+	}, 0)
+	spew.Dump(incrimentNumber)
 }
