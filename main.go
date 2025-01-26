@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/davecgh/go-spew/spew"
+	"fmt"
+
 	"github.com/hiroky1983/array-method/array"
 )
 
@@ -33,19 +34,43 @@ func main() {
 		return NewPerson{Person: person, IsAdult: person.Age >= 20}
 	})
 
-	spew.Dump(personMap)
+	fmt.Println(personMap)
 
 	// reduce
 	personWithIsAdult := array.Reduce(pc, func(prev []NewPerson, current Person) []NewPerson {
 		return append(prev, NewPerson{Person: Person{Name: current.Name, Age: current.Age}, IsAdult: current.Age >= 20})
 	}, []NewPerson{})
 
-	spew.Dump(personWithIsAdult)
+	fmt.Println(personWithIsAdult)
 
 	nums := []int{1, 2, 3, 4, 5}
 
 	incrimentNumber := array.Reduce(nums, func(prev int, current int) int {
 		return prev + current
 	}, 0)
-	spew.Dump(incrimentNumber)
+	fmt.Println(incrimentNumber)
+
+	// Filter
+	evenNumbers := array.Filter(nums, func(n int) bool {
+		return n%2 == 0
+	})
+	fmt.Println(evenNumbers)
+
+	// Find
+	person := array.Find(pc, func(p Person) bool {
+		return p.Name == "Alice"
+	})
+	fmt.Println(person)
+
+	// FindIndex
+	index := array.FindIndex(pc, func(p Person) bool {
+		return p.Name == "Alice"
+	})
+	fmt.Println(index)
+
+	// Some
+	some := array.Some(pc, func(p Person) bool {
+		return p.Name == "Alice"
+	})
+	fmt.Println(some)
 }
