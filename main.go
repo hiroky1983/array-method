@@ -73,4 +73,11 @@ func main() {
 		return p.Name == "Alice"
 	})
 	fmt.Println(some)
+
+
+	arr := []int{1, 2, 3, 4, 5}
+	mapped := array.Map(arr, func(v int) int {
+		return v * 3
+	})
+	fmt.Println("Mapped:", mapped) // Output: [3 6 9 12 15]
 }
